@@ -12,7 +12,7 @@ class Phrase {
 
 
     addPhraseToDisplay() {
-        let phraseLength = phrase.length;
+        let phraseLength = this.phrase.length;
         // let phraseLength = [...phrase].map(letter => {
         //     if(/^[a-z]+$/.test(phraseLength)) {
         //     list.createElement('li.letter')
@@ -20,18 +20,18 @@ class Phrase {
         // });
 
         for (let i=0; i < phraseLength; i++) {
-           if (/^[a-z]+$/.test(phrase.charAt(i))) {
-            list.appendChild(createLi);
-            //li.classList.add(`hide letter at ${phrase.charAt(i)}`);
+           if (/[a-z]/i.test(this.phrase.charAt(i))) {
+            list.appendChild(createLi).classList.add(`hide_letter_${this.phrase.charAt(i)}`);
             
-        }  else if (/\s/.test(phrase.charAt(i))) {
-            list.appendChild('li.space');
+        }  else if (/\s/.test(this.phrase.charAt(i))) {
+            list.appendChild(createLi).classList.add('space');
         } else {
             alert('you have no idea what is going on do you');
         }
         
     
          };
+         console.log(phraseLength);
     }
 
     checkLetter() {
@@ -43,8 +43,7 @@ class Phrase {
     }
 }
 const test = new Phrase('How does thIs work');
-console.log(test.phrase);
-console.log(list);
+
 test.addPhraseToDisplay();
 
-list.appendChild(createLi);
+//list.appendChild(createLi);
