@@ -2,7 +2,7 @@
  * Project 4 - OOP Game App
  * Phrase.js */
 
-let list = document.querySelector('div#phrase ul');
+let ul = document.querySelector('div#phrase ul');
 let createLi = document.createElement('li');
 
 class Phrase {
@@ -28,15 +28,12 @@ class Phrase {
     
         [...this.phrase].forEach(character => {
             if (/[a-z]/.test(character)) {
-                list.appendChild(createLi);
-                createLi.classList.add(`hide_letter_${character}`);
-                createLi.textContent = character;
+                //ul.appendChild(createLi);
+                ul.innerHTML += (`<li class = "hide letter ${character}">${character}</li>`);
                 
             } else if (/\s/.test(character)) {
-                list.appendChild(createLi).classList.add('space');
-            } else {
-                alert('you have no idea what is going on do you');
-            }
+                ul.appendChild(createLi).classList.add('space');
+            } 
             });
         };
     
@@ -48,7 +45,7 @@ class Phrase {
         //text here
     }
 }
-const test = new Phrase('How does thIs work');
+const test = new Phrase('How does thIs wOrk');
 
 test.addPhraseToDisplay();
 console.log([...test.phrase])
