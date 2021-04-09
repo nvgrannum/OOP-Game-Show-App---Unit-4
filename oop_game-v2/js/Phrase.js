@@ -4,7 +4,6 @@
 
 let ul = document.querySelector('div#phrase ul');
 let createLi = document.createElement('li');
-let keyboard = document.querySelectorAll('.key');
 
 class Phrase {
     constructor(phrase) {
@@ -38,17 +37,13 @@ class Phrase {
         };
     
     checkLetter(letter) {
-        // keyboard.addEventListener('click', (e) => {
-        //     let key = e.target.textContent;
-        //     console.log(key);
-        // })
-        if (this.phrase.includes(letter)) {
+        if (this.activePhrase.includes(letter)) {
             return true;
         }
     }
 
     showMatchedLetter(letter) {
-        let reveal = document.querySelectorAll('li');
+        let reveal = document.querySelectorAll('#phrase, li');
         for (let i=0; i<reveal.length; i++) {
             if (reveal[i].textContent === letter) {
                 reveal[i].classList.add('show');
@@ -57,7 +52,7 @@ class Phrase {
         }
     };
 };
-const test = new Phrase('How Are yOu');
+//const test = new Phrase('How Are yOu');
 
-test.addPhraseToDisplay();
-console.log([...test.phrase])
+//test.addPhraseToDisplay();
+//console.log([...test.phrase])
