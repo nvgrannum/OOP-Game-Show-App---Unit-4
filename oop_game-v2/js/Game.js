@@ -4,6 +4,18 @@
 
 const overlay = document.querySelector('#overlay');
 const message = document.querySelector('#game-over-message');
+let lives = document.querySelectorAll('li.tries');
+
+// let livesArr = new Array(5);
+//     for (let i=0; i<livesArr.length; i++) {
+//         livesArr[i] = new Image;
+//         livesArr[i].src = 'images/liveHeart.png';
+//     }
+let scoreboard = document.querySelector('#scoreboard ol');
+//scoreboard.innerHTML = livesArr;
+
+
+
 
 class Game {
     constructor() {
@@ -31,68 +43,82 @@ class Game {
     };
 
     handleInteraction(letter) {
-        if (checkLetter(letter)) {
+        if (this.activePhrase.checkLetter(letter)) {
             this.activePhrase.showMatchedLetter(letter);
-            letter.classList.add('chosen');
 
             if (this.checkForWin()) {
                 this.gameOver('win');
             };
 
         } else {
-            letter.classList.add('wrong');
             this.removeLife();
         }
     };
 
     removeLife() {
-        missed += 1;
-        if (missed >= 5) {
+        // let liveHeart = document.querySelector('[src="images/liveHeart.png"]');
+        // liveHeart.src = 'images/lostHeart.png';
+
+        this.missed += 1;
+        if (this.missed >= 5) {
             this.gameOver('lose');
         }
-        let lives = querySelectorAll('li.tries');
-        let livesArr = Array.from(lives);
-        livesArr.shift();
-        livesArr.push('images/lostHeart.png');
+        
+        lives.shift();
+        lives.push('images/lostHeart.png');
     };
 
     checkForWin() {
-        for (let i=0; i < this.activePhrase.length; i++) {
-            if (this.activePhrase[i].className === 'show') {
+        let remaining = 0;
+        let phraseLi = Array.from(ul.childNodes);
+        // for (let i=0; i < this.activePhrase.length; i++) {
+        //     if (this.activePhrase[i].className != 'hide') {
+        //         return true;
+        //     }
+        //};
+        phraseLi.forEach(li => {               
+            if (li.className == 'hide') {
+                remaining += 1
+            }
+            if (remaining === 0) {
                 return true;
             }
-    }
+            
+        });
     };
 
     gameOver(status) {
 
         if (status === "win") {
             message.innerHTML = "Congratulations! You win!"
-            overlay.classList.add('win');
+            overlay.className = 'win';
             this.reset();
         } else {
             message.innerHTML = "Try again!"
-            overlay.classList.add('lose');
+            alert(message.textContent);
+            message.style.display = true;
+            overlay.className = 'lose';
             this.reset();
         }
     };
 
     reset() {
-        this.missed = 0;
-        ul.innerHTML = '';
-        livesArr = [
-            'images/liveHeart.png',
-            'images/liveHeart.png',
-            'images/liveHeart.png',
-            'images/liveHeart.png',
-            'images/liveHeart.png'
-        ];
-        let shown = document.querySelectorAll('.show');
-        for (let i=0; i<shown.length; i++) {
-                shown[i].classList.remove('show');
-                shown[i].classList.add('hide');
-            }
-        
+        // this.missed = 0;
+        // ul.innerHTML = '';
+        // livesArr = [
+        //     'images/liveHeart.png',
+        //     'images/liveHeart.png',
+        //     'images/liveHeart.png',
+        //     'images/liveHeart.png',
+        //     'images/liveHeart.png'
+        // ];
+        // let shown = document.querySelectorAll('.show');
+        // for (let i=0; i<shown.length; i++) {
+        //         shown[i].classList.remove('show');
+        //         shown[i].classList.add('hide');
+        //     }
+
+        //location.reload();
     };
 
 };

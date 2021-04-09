@@ -37,7 +37,7 @@ class Phrase {
         };
     
     checkLetter(letter) {
-        if (this.activePhrase.includes(letter)) {
+        if (this.phrase.includes(letter)) {
             return true;
         }
     }
@@ -55,4 +55,3 @@ class Phrase {
 //const test = new Phrase('How Are yOu');
 
 //test.addPhraseToDisplay();
-//console.log([...test.phrase])
