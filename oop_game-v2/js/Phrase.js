@@ -4,6 +4,7 @@
 
 let ul = document.querySelector('div#phrase ul');
 let createLi = document.createElement('li');
+let keyboard = document.querySelectorAll('.key');
 
 class Phrase {
     constructor(phrase) {
@@ -13,18 +14,17 @@ class Phrase {
     addPhraseToDisplay() {
         let phraseLength = this.phrase.length;
 
-        // for (let i=0; i < phraseLength; i++) {
-        //    if (/[a-z]/i.test(this.phrase.charAt(i))) {
-        //     list.appendChild(createLi);
-        //     createLi.classList.add(`hide_letter_${this.phrase.charAt(i)}`);
-        //     createLi.textContent = this.phrase.charAt(i);
+    //     for (let i=0; i < phraseLength; i++) {
+    //        if (/[a-z]/i.test(this.phrase.charAt(i))) {
+    //         ul.appendChild(createLi);
+    //         createLi.classList.add(`hide_letter_${this.phrase.charAt(i)}`);
+    //         createLi.textContent = this.phrase.charAt(i);
             
-        // } else if (/\s/.test(this.phrase.charAt(i))) {
-        //     list.appendChild(createLi).classList.add('space');
-        // } else {
-        //     alert('you have no idea what is going on do you');
-        // }
-        // };
+    //     } else if (/\s/.test(this.phrase.charAt(i))) {
+    //         ul.appendChild(createLi).classList.add('space');
+    //     } 
+    //     }
+    // };
     
         [...this.phrase].forEach(character => {
             if (/[a-z]/.test(character)) {
@@ -37,16 +37,27 @@ class Phrase {
             });
         };
     
-    checkLetter() {
-        //text here
+    checkLetter(letter) {
+        // keyboard.addEventListener('click', (e) => {
+        //     let key = e.target.textContent;
+        //     console.log(key);
+        // })
+        if (this.phrase.includes(letter)) {
+            return true;
+        }
     }
 
-    showMatchedLetter() {
-        //text here
-    }
-}
-const test = new Phrase('How does thIs wOrk');
+    showMatchedLetter(letter) {
+        let reveal = document.querySelectorAll('li');
+        for (let i=0; i<reveal.length; i++) {
+            if (reveal[i].textContent === letter) {
+                reveal[i].classList.add('show');
+                reveal[i].classList.remove('hide');
+            }
+        }
+    };
+};
+const test = new Phrase('How Are yOu');
 
 test.addPhraseToDisplay();
 console.log([...test.phrase])
-//list.appendChild(createLi);
