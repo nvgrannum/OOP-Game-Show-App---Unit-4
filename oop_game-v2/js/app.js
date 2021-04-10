@@ -18,7 +18,7 @@ startButton.addEventListener('click', (e) => {
 keyboard.addEventListener('click', (e) => {
     let key = e.target;
     if (key.tagName === 'BUTTON') {
-        game.handleInteraction(key.textContent);
+        game.handleInteraction(key);
     }
 });
 

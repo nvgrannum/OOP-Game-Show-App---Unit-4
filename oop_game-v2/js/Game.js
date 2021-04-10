@@ -5,15 +5,7 @@
 const overlay = document.querySelector('#overlay');
 const message = document.querySelector('#game-over-message');
 let lives = document.querySelectorAll('li.tries');
-
-// let livesArr = new Array(5);
-//     for (let i=0; i<livesArr.length; i++) {
-//         livesArr[i] = new Image;
-//         livesArr[i].src = 'images/liveHeart.png';
-//     }
 let scoreboard = document.querySelector('#scoreboard ol');
-//scoreboard.innerHTML = livesArr;
-
 
 
 
@@ -34,6 +26,12 @@ class Game {
         overlay.style.display = 'none';
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
+        let keyboard = document.querySelectorAll('.keyrow button');
+            keyboard.forEach(key => {
+                key.disabled = false;
+                key.classList.remove('wrong');
+                key.classList.remove('chosen');
+                key.className = 'key'});
     };
 
     getRandomPhrase() {
@@ -43,8 +41,10 @@ class Game {
     };
 
     handleInteraction(letter) {
-        if (this.activePhrase.checkLetter(letter)) {
-            this.activePhrase.showMatchedLetter(letter);
+        letter.disabled = 'true';
+        if (this.activePhrase.checkLetter(letter.textContent)) {
+            this.activePhrase.showMatchedLetter(letter.textContent);
+            letter.classList.add('chosen');
 
             if (this.checkForWin()) {
                 this.gameOver('win');
@@ -52,39 +52,33 @@ class Game {
 
         } else {
             this.removeLife();
+            letter.classList.add('wrong');
         }
     };
 
     removeLife() {
-        // let liveHeart = document.querySelector('[src="images/liveHeart.png"]');
-        // liveHeart.src = 'images/lostHeart.png';
+        let liveHeart = document.querySelector('[src="images/liveHeart.png"]');
+        liveHeart.src = 'images/lostHeart.png';
 
         this.missed += 1;
         if (this.missed >= 5) {
             this.gameOver('lose');
         }
-        
-        lives.shift();
-        lives.push('images/lostHeart.png');
     };
 
     checkForWin() {
         let remaining = 0;
         let phraseLi = Array.from(ul.childNodes);
-        // for (let i=0; i < this.activePhrase.length; i++) {
-        //     if (this.activePhrase[i].className != 'hide') {
-        //         return true;
-        //     }
-        //};
+       
         phraseLi.forEach(li => {               
-            if (li.className == 'hide') {
+            if (li.classList.contains('hide')) {
                 remaining += 1
-            }
-            if (remaining === 0) {
+            }   
+        });
+
+        if (remaining === 0) {
                 return true;
             }
-            
-        });
     };
 
     gameOver(status) {
@@ -95,30 +89,31 @@ class Game {
             this.reset();
         } else {
             message.innerHTML = "Try again!"
-            alert(message.textContent);
-            message.style.display = true;
+            //message.style.display = true;
             overlay.className = 'lose';
             this.reset();
         }
     };
 
     reset() {
-        // this.missed = 0;
-        // ul.innerHTML = '';
-        // livesArr = [
-        //     'images/liveHeart.png',
-        //     'images/liveHeart.png',
-        //     'images/liveHeart.png',
-        //     'images/liveHeart.png',
-        //     'images/liveHeart.png'
-        // ];
-        // let shown = document.querySelectorAll('.show');
+        let lostHearts = Array.from(document.querySelectorAll('[src="images/lostHeart.png"]'));
+            lostHearts.forEach(heart => {heart.src='images/liveHeart.png'});
+        // let keyboard = document.querySelectorAll('.keyrow button');
+        //     keyboard.forEach(key => {
+        //         key.disabled = false;
+        //         key.classList.remove('wrong');
+        //         key.classList.remove('chosen');
+        //         key.className = 'key'});
+
+        this.missed = 0;
+        ul.innerHTML = '';
+        let shown = document.querySelectorAll('.show');
         // for (let i=0; i<shown.length; i++) {
         //         shown[i].classList.remove('show');
         //         shown[i].classList.add('hide');
         //     }
+        overlay.style.display = "block";
 
-        //location.reload();
     };
 
 };
