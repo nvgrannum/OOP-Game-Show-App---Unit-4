@@ -12,18 +12,6 @@ class Phrase {
 
     addPhraseToDisplay() {
         let phraseLength = this.phrase.length;
-
-    //     for (let i=0; i < phraseLength; i++) {
-    //        if (/[a-z]/i.test(this.phrase.charAt(i))) {
-    //         ul.appendChild(createLi);
-    //         createLi.classList.add(`hide_letter_${this.phrase.charAt(i)}`);
-    //         createLi.textContent = this.phrase.charAt(i);
-            
-    //     } else if (/\s/.test(this.phrase.charAt(i))) {
-    //         ul.appendChild(createLi).classList.add('space');
-    //     } 
-    //     }
-    // };
     
         [...this.phrase].forEach(character => {
             if (/[a-z]/.test(character)) {
@@ -52,6 +40,3 @@ class Phrase {
         }
     };
 };
-//const test = new Phrase('How Are yOu');
-
-//test.addPhraseToDisplay();
