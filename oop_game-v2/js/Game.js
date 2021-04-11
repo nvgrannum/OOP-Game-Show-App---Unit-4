@@ -22,7 +22,7 @@ class Game {
         this.activePhrase = null;
     };
 /*
-Begins the game and the 'start' screen visibility is set to 'none'. It gets a random phrase (see getRandomPhrase below) and adds that to the display for the game to begin.
+Begins the game and the 'start screen' visibility is set to 'none'. It gets a random phrase (see getRandomPhrase below) and adds that to the display for the game to begin.
 */
     startGame() {
         overlay.style.display = 'none';
