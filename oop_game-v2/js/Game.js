@@ -32,6 +32,9 @@ Begins the game and the 'start screen' visibility is set to 'none'. It gets a ra
             keyboard.forEach(key => {
                 key.disabled = false;
                 key.className = 'key'});
+        let lostHearts = Array.from(document.querySelectorAll('[src="images/lostHeart.png"]'));
+        lostHearts.forEach(heart => {heart.src='images/liveHeart.png'});
+        this.missed = 0;
     };
 
 //Generates a random number from 0 to the length of the phrases array. Takes that number and uses it as the index in the phrases array to get a random phrase from the array.
@@ -84,8 +87,13 @@ Begins the game and the 'start screen' visibility is set to 'none'. It gets a ra
             }
     };
 
-//This is it. Win or lose. Which will it be?
+//This is it. Win or lose. Which will it be? 
     gameOver(status) {
+        
+        let keyboard = document.querySelectorAll('.keyrow button');
+            keyboard.forEach(key => {
+                key.disabled = true;
+            });
 
         if (status === "win") {
             message.innerHTML = "Congratulations! You win!"
@@ -102,9 +110,6 @@ Begins the game and the 'start screen' visibility is set to 'none'. It gets a ra
 Resets the keyboard keys and all lives are regained. LI elements in the phrase section are removed for a clean addition of new elements at the start of a new game
 */    
     reset() {
-        let lostHearts = Array.from(document.querySelectorAll('[src="images/lostHeart.png"]'));
-            lostHearts.forEach(heart => {heart.src='images/liveHeart.png'});
-        this.missed = 0;
         ul.innerHTML = '';
         overlay.style.display = "block";
 
